@@ -1,0 +1,95 @@
+for types, see https://root.cern.ch/doc/master/classTTree.html#autotoc_md1113
+for some documentation about "truth" branches, see https://twiki.cern.ch/twiki/bin/view/Atlas/ZdcSimulationRel23
+
+runNumber : runNumber/i -> unsigned int
+eventNumber : eventNumber/i -> unsigned int
+lumiBlock : lumiBlock/i -> unsigned int
+bunchGroup : bunchGroup/b -> unsigned char
+bcid      : bcid/i -> unsigned int
+avgIntPerCrossing : avgIntPerCrossing/F -> float
+actIntPerCrossing : actIntPerCrossing/F -> float
+trigger   : trigger/l -> unsigned long
+trigger_TBP : trigger_TBP/i -> unsigned int
+tbp       : tbp[16]/i -> unsigned int
+tav       : tav[16]/i -> unsigned int
+passBits  : passBits/i -> unsigned int
+extendedLevel1ID : extendedLevel1ID/i -> unsigned int
+timeStamp : timeStamp/i -> unsigned int
+timeStampNSOffset : timeStampNSOffset/i -> unsigned int
+zdcEventInfoError : zdcEventInfoError/b -> unsigned char
+zdcEventInfoErrorWord : zdcEventInfoErrorWord/i -> unsigned int
+zdc_raw   : zdc_raw[2][4][2][2][24]/s -> unsigned short
+rpd_raw   : rpd_raw[2][16][24]/s -> unsigned short
+zdc_ZdcAmp : zdc_ZdcAmp[2]/F -> float
+zdc_ZdcAmpErr : zdc_ZdcAmpErr[2]/F -> float
+zdc_ZdcEnergy : zdc_ZdcEnergy[2]/F -> float
+zdc_ZdcEnergyErr : zdc_ZdcEnergyErr[2]/F -> float
+zdc_ZdcTime : zdc_ZdcTime[2]/F -> float
+zdc_ZdcStatus : zdc_ZdcStatus[2]/S -> short
+zdc_ZdcTrigEff : zdc_ZdcTrigEff[2]/F -> float
+zdc_ZdcModuleMask : zdc_ZdcModuleMask/i -> unsigned int
+zdc_ZdcLucrodTriggerSideAmp : zdc_ZdcLucrodTriggerSideAmp[2]/S -> short
+zdc_ZdcModuleAmp : zdc_ZdcModuleAmp[2][4]/F -> float
+zdc_ZdcModuleTime : zdc_ZdcModuleTime[2][4]/F -> float
+zdc_ZdcModuleFitAmp : zdc_ZdcModuleFitAmp[2][4]/F -> float
+zdc_ZdcModuleFitT0 : zdc_ZdcModuleFitT0[2][4]/F -> float
+zdc_ZdcModuleStatus : zdc_ZdcModuleStatus[2][4]/i -> unsigned int
+zdc_ZdcModuleChisq : zdc_ZdcModuleChisq[2][4]/F -> float
+zdc_ZdcModuleCalibAmp : zdc_ZdcModuleCalibAmp[2][4]/F -> float
+zdc_ZdcModuleCalibTime : zdc_ZdcModuleCalibTime[2][4]/F -> float
+zdc_ZdcModuleBkgdMaxFraction : zdc_ZdcModuleBkgdMaxFraction[2][4]/F -> float
+zdc_ZdcModuleAmpError : zdc_ZdcModuleAmpError[2][4]/F -> float
+zdc_ZdcModuleMinDeriv2nd : zdc_ZdcModuleMinDeriv2nd[2][4]/F -> float
+zdc_ZdcModulePresample : zdc_ZdcModulePresample[2][4]/F -> float
+zdc_ZdcModulePreSampleAmp : zdc_ZdcModulePreSampleAmp[2][4]/F -> float
+zdc_ZdcLucrodTriggerAmp : zdc_ZdcLucrodTriggerAmp[2][4]/S -> short
+zdc_ZdcModuleMaxADC : zdc_ZdcModuleMaxADC[2][4]/F -> float
+zdc_ZdcModuleTruthTotal : zdc_ZdcModuleTruthTotal[2][7]/F -> float
+zdc_ZdcModuleTruthInivsible : zdc_ZdcModuleTruthInvisible[2][7]/F -> float
+zdc_ZdcModuleTruthEM : zdc_ZdcModuleTruthEM[2][7]/F -> float
+zdc_ZdcModuleTruthNonEM : zdc_ZdcModuleTruthNonEM[2][7]/F -> float
+zdc_ZdModulecTruthEscaped : zdc_ZdcModuleTruthEscaped[2][7]/F -> float
+zdc_ZdcModuleTruthNphotons : zdc_ZdcModuleTruthNphotons[2][7]/i -> unsigned int
+zdc_RpdModuleTruthNphotons : zdc_RpdModuleTruthNphotons[2][16]/i -> unsigned int
+zdc_ZdcTruthTotal : zdc_ZdcTruthTotal[2]/F -> float
+zdc_ZdcTruthInvisible : zdc_ZdcTruthInvisible[2]/F -> float
+zdc_ZdcTruthEM : zdc_ZdcTruthEM[2]/F -> float
+zdc_ZdcTruthNonEM : zdc_ZdcTruthNonEM[2]/F -> float
+zdc_ZdcTruthEscaped : zdc_ZdcTruthEscaped[2]/F -> float
+zdc_ZdcTruthParticlePosx : vector<float>
+zdc_ZdcTruthParticlePosy : vector<float>
+zdc_ZdcTruthParticlePosz : vector<float>
+zdc_ZdcTruthParticleTime : vector<float>
+zdc_ZdcTruthParticlePx : vector<float>
+zdc_ZdcTruthParticlePy : vector<float>
+zdc_ZdcTruthParticlePz : vector<float>
+zdc_ZdcTruthParticleEnergy : vector<float>
+zdc_RpdChannelBaseline : zdc_RpdChannelBaseline[2][16]/F -> float
+zdc_RpdChannelPileupExpFitParams : zdc_RpdChannelPileupExpFitParams[2][16][2]/F -> float
+zdc_RpdChannelPileupStretchedExpFitParams : zdc_RpdChannelPileupStretchedExpFitParams[2][16][3]/F -> float
+zdc_RpdChannelPileupExpFitParamErrs : zdc_RpdChannelPileupExpFitParamErrs[2][16][2]/F -> float
+zdc_RpdChannelPileupStretchedExpFitParamErrs : zdc_RpdChannelPileupStretchedExpFitParamErrs[2][16][3]/F -> float
+zdc_RpdChannelPileupExpFitMSE : zdc_RpdChannelPileupExpFitMSE[2][16]/F -> float
+zdc_RpdChannelPileupStretchedExpFitMSE : zdc_RpdChannelPileupStretchedExpFitMSE[2][16]/F -> float
+zdc_RpdChannelAmplitude : zdc_RpdChannelAmplitude[2][16]/F -> float
+zdc_RpdChannelAmplitudeCalib : zdc_RpdChannelAmplitudeCalib[2][16]/F -> float
+zdc_RpdChannelMaxADC : zdc_RpdChannelMaxADC[2][16]/F -> float
+zdc_RpdChannelMaxADCCalib : zdc_RpdChannelMaxADCCalib[2][16]/F -> float
+zdc_RpdChannelMaxSample : zdc_RpdChannelMaxSample[2][16]/i -> unsigned int
+zdc_RpdChannelStatus : zdc_RpdChannelStatus[2][16]/i -> unsigned int
+zdc_RpdChannelPileupFrac : zdc_RpdChannelPileupFrac[2][16]/F -> float
+zdc_RpdSideStatus : zdc_RpdSideStatus[2]/i -> unsigned int
+zdc_centroidEventValid : zdc_centroidEventValid/B -> char
+zdc_centroidStatus : zdc_centroidStatus[2]/i -> unsigned int
+zdc_RPDChannelSubtrAmp : zdc_RPDChannelSubtrAmp[2][16]/F -> float
+zdc_RPDSubtrAmpSum : zdc_RPDSubtrAmpSum[2]/F -> float
+zdc_xCentroidPreGeomCorPreAvgSubtr : zdc_xCentroidPreGeomCorPreAvgSubtr[2]/F -> float
+zdc_yCentroidPreGeomCorPreAvgSubtr : zdc_yCentroidPreGeomCorPreAvgSubtr[2]/F -> float
+zdc_xCentroidPreAvgSubtr : zdc_xCentroidPreAvgSubtr[2]/F -> float
+zdc_yCentroidPreAvgSubtr : zdc_yCentroidPreAvgSubtr[2]/F -> float
+zdc_xCentroid : zdc_xCentroid[2]/F -> float
+zdc_yCentroid : zdc_yCentroid[2]/F -> float
+zdc_xRowCentroid : zdc_xRowCentroid[2][4]/F -> float
+zdc_yColCentroid : zdc_yColCentroid[2][4]/F -> float
+zdc_reactionPlaneAngle : zdc_reactionPlaneAngle[2]/F -> float
+zdc_cosDeltaReactionPlaneAngle : zdc_cosDeltaReactionPlaneAngle/F -> float

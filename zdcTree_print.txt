@@ -1,0 +1,382 @@
+******************************************************************************
+*Tree    :zdcTree   : ZDC Tree                                               *
+*Entries :   100000 : Total =       738909242 bytes  File  Size =   98255401 *
+*        :          : Tree compression factor =   7.53                       *
+******************************************************************************
+*Br    0 :runNumber : runNumber/i                                            *
+*Entries :   100000 : Total  Size=     401608 bytes  File Size  =       3477 *
+*Baskets :       13 : Basket Size=      32000 bytes  Compression= 115.34     *
+*............................................................................*
+*Br    1 :eventNumber : eventNumber/i                                        *
+*Entries :   100000 : Total  Size=     401642 bytes  File Size  =       7181 *
+*Baskets :       13 : Basket Size=      32000 bytes  Compression=  55.85     *
+*............................................................................*
+*Br    2 :lumiBlock : lumiBlock/i                                            *
+*Entries :   100000 : Total  Size=     401608 bytes  File Size  =       3437 *
+*Baskets :       13 : Basket Size=      32000 bytes  Compression= 116.68     *
+*............................................................................*
+*Br    3 :bunchGroup : bunchGroup/b                                          *
+*Entries :   100000 : Total  Size=     100819 bytes  File Size  =        887 *
+*Baskets :        4 : Basket Size=      32000 bytes  Compression= 113.10     *
+*............................................................................*
+*Br    4 :bcid      : bcid/i                                                 *
+*Entries :   100000 : Total  Size=     401523 bytes  File Size  =       3132 *
+*Baskets :       13 : Basket Size=      32000 bytes  Compression= 128.02     *
+*............................................................................*
+*Br    5 :avgIntPerCrossing : avgIntPerCrossing/F                            *
+*Entries :   100000 : Total  Size=     401744 bytes  File Size  =       3302 *
+*Baskets :       13 : Basket Size=      32000 bytes  Compression= 121.48     *
+*............................................................................*
+*Br    6 :actIntPerCrossing : actIntPerCrossing/F                            *
+*Entries :   100000 : Total  Size=     401744 bytes  File Size  =       3302 *
+*Baskets :       13 : Basket Size=      32000 bytes  Compression= 121.48     *
+*............................................................................*
+*Br    7 :trigger   : trigger/l                                              *
+*Entries :   100000 : Total  Size=     802843 bytes  File Size  =       7499 *
+*Baskets :       26 : Basket Size=      32000 bytes  Compression= 106.95     *
+*............................................................................*
+*Br    8 :trigger_TBP : trigger_TBP/i                                        *
+*Entries :   100000 : Total  Size=     401642 bytes  File Size  =       3515 *
+*Baskets :       13 : Basket Size=      32000 bytes  Compression= 114.10     *
+*............................................................................*
+*Br    9 :tbp       : tbp[16]/i                                              *
+*Entries :   100000 : Total  Size=    6418998 bytes  File Size  =      79752 *
+*Baskets :      201 : Basket Size=      32000 bytes  Compression=  80.43     *
+*............................................................................*
+*Br   10 :tav       : tav[16]/i                                              *
+*Entries :   100000 : Total  Size=    6418998 bytes  File Size  =      80556 *
+*Baskets :      201 : Basket Size=      32000 bytes  Compression=  79.63     *
+*............................................................................*
+*Br   11 :passBits  : passBits/i                                             *
+*Entries :   100000 : Total  Size=     401591 bytes  File Size  =       3184 *
+*Baskets :       13 : Basket Size=      32000 bytes  Compression= 125.95     *
+*............................................................................*
+*Br   12 :extendedLevel1ID : extendedLevel1ID/i                              *
+*Entries :   100000 : Total  Size=     401727 bytes  File Size  =       3289 *
+*Baskets :       13 : Basket Size=      32000 bytes  Compression= 121.96     *
+*............................................................................*
+*Br   13 :timeStamp : timeStamp/i                                            *
+*Entries :   100000 : Total  Size=     401608 bytes  File Size  =       3477 *
+*Baskets :       13 : Basket Size=      32000 bytes  Compression= 115.34     *
+*............................................................................*
+*Br   14 :timeStampNSOffset : timeStampNSOffset/i                            *
+*Entries :   100000 : Total  Size=     401744 bytes  File Size  =       3302 *
+*Baskets :       13 : Basket Size=      32000 bytes  Compression= 121.48     *
+*............................................................................*
+*Br   15 :zdcEventInfoError : zdcEventInfoError/b                            *
+*Entries :   100000 : Total  Size=     100875 bytes  File Size  =        915 *
+*Baskets :        4 : Basket Size=      32000 bytes  Compression= 109.67     *
+*............................................................................*
+*Br   16 :zdcEventInfoErrorWord : zdcEventInfoErrorWord/i                    *
+*Entries :   100000 : Total  Size=     401812 bytes  File Size  =       3354 *
+*Baskets :       13 : Basket Size=      32000 bytes  Compression= 119.61     *
+*............................................................................*
+*Br   17 :zdc_raw   : zdc_raw[2][4][2][2][24]/s                              *
+*Entries :   100000 : Total  Size=  154085341 bytes  File Size  =   14447504 *
+*Baskets :     5000 : Basket Size=      32000 bytes  Compression=  10.66     *
+*............................................................................*
+*Br   18 :rpd_raw   : rpd_raw[2][16][24]/s                                   *
+*Entries :   100000 : Total  Size=  154085331 bytes  File Size  =   11547750 *
+*Baskets :     5000 : Basket Size=      32000 bytes  Compression=  13.33     *
+*............................................................................*
+*Br   19 :zdc_ZdcAmp : zdc_ZdcAmp[2]/F                                       *
+*Entries :   100000 : Total  Size=     802931 bytes  File Size  =     687404 *
+*Baskets :       26 : Basket Size=      32000 bytes  Compression=   1.17     *
+*............................................................................*
+*Br   20 :zdc_ZdcAmpErr : zdc_ZdcAmpErr[2]/F                                 *
+*Entries :   100000 : Total  Size=     803021 bytes  File Size  =     639868 *
+*Baskets :       26 : Basket Size=      32000 bytes  Compression=   1.25     *
+*............................................................................*
+*Br   21 :zdc_ZdcEnergy : zdc_ZdcEnergy[2]/F                                 *
+*Entries :   100000 : Total  Size=     803021 bytes  File Size  =     687482 *
+*Baskets :       26 : Basket Size=      32000 bytes  Compression=   1.17     *
+*............................................................................*
+*Br   22 :zdc_ZdcEnergyErr : zdc_ZdcEnergyErr[2]/F                           *
+*Entries :   100000 : Total  Size=     803111 bytes  File Size  =     639946 *
+*Baskets :       26 : Basket Size=      32000 bytes  Compression=   1.25     *
+*............................................................................*
+*Br   23 :zdc_ZdcTime : zdc_ZdcTime[2]/F                                     *
+*Entries :   100000 : Total  Size=     802961 bytes  File Size  =     657884 *
+*Baskets :       26 : Basket Size=      32000 bytes  Compression=   1.22     *
+*............................................................................*
+*Br   24 :zdc_ZdcStatus : zdc_ZdcStatus[2]/S                                 *
+*Entries :   100000 : Total  Size=     401678 bytes  File Size  =       3250 *
+*Baskets :       13 : Basket Size=      32000 bytes  Compression= 123.41     *
+*............................................................................*
+*Br   25 :zdc_ZdcTrigEff : zdc_ZdcTrigEff[2]/F                               *
+*Entries :   100000 : Total  Size=     803051 bytes  File Size  =       6525 *
+*Baskets :       26 : Basket Size=      32000 bytes  Compression= 122.94     *
+*............................................................................*
+*Br   26 :zdc_ZdcModuleMask : zdc_ZdcModuleMask/i                            *
+*Entries :   100000 : Total  Size=     401744 bytes  File Size  =      76563 *
+*Baskets :       13 : Basket Size=      32000 bytes  Compression=   5.24     *
+*............................................................................*
+*Br   27 :zdc_ZdcLucrodTriggerSideAmp : zdc_ZdcLucrodTriggerSideAmp[2]/S     *
+*Entries :   100000 : Total  Size=     401916 bytes  File Size  =       3446 *
+*Baskets :       13 : Basket Size=      32000 bytes  Compression= 116.44     *
+*............................................................................*
+*Br   28 :zdc_ZdcModuleAmp : zdc_ZdcModuleAmp[2][4]/F                        *
+*Entries :   100000 : Total  Size=    3211067 bytes  File Size  =    2374611 *
+*Baskets :      101 : Basket Size=      32000 bytes  Compression=   1.35     *
+*............................................................................*
+*Br   29 :zdc_ZdcModuleTime : zdc_ZdcModuleTime[2][4]/F                      *
+*Entries :   100000 : Total  Size=    3211172 bytes  File Size  =    2287294 *
+*Baskets :      101 : Basket Size=      32000 bytes  Compression=   1.40     *
+*............................................................................*
+*Br   30 :zdc_ZdcModuleFitAmp : zdc_ZdcModuleFitAmp[2][4]/F                  *
+*Entries :   100000 : Total  Size=    3211382 bytes  File Size  =    2289964 *
+*Baskets :      101 : Basket Size=      32000 bytes  Compression=   1.40     *
+*............................................................................*
+*Br   31 :zdc_ZdcModuleFitT0 : zdc_ZdcModuleFitT0[2][4]/F                    *
+*Entries :   100000 : Total  Size=    3211277 bytes  File Size  =    1879255 *
+*Baskets :      101 : Basket Size=      32000 bytes  Compression=   1.71     *
+*............................................................................*
+*Br   32 :zdc_ZdcModuleStatus : zdc_ZdcModuleStatus[2][4]/i                  *
+*Entries :   100000 : Total  Size=    3211382 bytes  File Size  =     222149 *
+*Baskets :      101 : Basket Size=      32000 bytes  Compression=  14.45     *
+*............................................................................*
+*Br   33 :zdc_ZdcModuleChisq : zdc_ZdcModuleChisq[2][4]/F                    *
+*Entries :   100000 : Total  Size=    3211277 bytes  File Size  =    2351151 *
+*Baskets :      101 : Basket Size=      32000 bytes  Compression=   1.36     *
+*............................................................................*
+*Br   34 :zdc_ZdcModuleCalibAmp : zdc_ZdcModuleCalibAmp[2][4]/F              *
+*Entries :   100000 : Total  Size=    3211592 bytes  File Size  =      28576 *
+*Baskets :      101 : Basket Size=      32000 bytes  Compression= 112.30     *
+*............................................................................*
+*Br   35 :zdc_ZdcModuleCalibTime : zdc_ZdcModuleCalibTime[2][4]/F            *
+*Entries :   100000 : Total  Size=    3211697 bytes  File Size  =      28677 *
+*Baskets :      101 : Basket Size=      32000 bytes  Compression= 111.91     *
+*............................................................................*
+*Br   36 :zdc_ZdcModuleBkgdMaxFraction : zdc_ZdcModuleBkgdMaxFraction[2][4]/F*
+*Entries :   100000 : Total  Size=    3212327 bytes  File Size  =    2259495 *
+*Baskets :      101 : Basket Size=      32000 bytes  Compression=   1.42     *
+*............................................................................*
+*Br   37 :zdc_ZdcModuleAmpError : zdc_ZdcModuleAmpError[2][4]/F              *
+*Entries :   100000 : Total  Size=    3211592 bytes  File Size  =    2293141 *
+*Baskets :      101 : Basket Size=      32000 bytes  Compression=   1.40     *
+*............................................................................*
+*Br   38 :zdc_ZdcModuleMinDeriv2nd : zdc_ZdcModuleMinDeriv2nd[2][4]/F        *
+*Entries :   100000 : Total  Size=    3211907 bytes  File Size  =    1699417 *
+*Baskets :      101 : Basket Size=      32000 bytes  Compression=   1.89     *
+*............................................................................*
+*Br   39 :zdc_ZdcModulePresample : zdc_ZdcModulePresample[2][4]/F            *
+*Entries :   100000 : Total  Size=    3211697 bytes  File Size  =      26567 *
+*Baskets :      101 : Basket Size=      32000 bytes  Compression= 120.80     *
+*............................................................................*
+*Br   40 :zdc_ZdcModulePreSampleAmp : zdc_ZdcModulePreSampleAmp[2][4]/F      *
+*Entries :   100000 : Total  Size=    3212012 bytes  File Size  =      26870 *
+*Baskets :      101 : Basket Size=      32000 bytes  Compression= 119.45     *
+*............................................................................*
+*Br   41 :zdc_ZdcLucrodTriggerAmp : zdc_ZdcLucrodTriggerAmp[2][4]/S          *
+*Entries :   100000 : Total  Size=    1606148 bytes  File Size  =      13396 *
+*Baskets :       51 : Basket Size=      32000 bytes  Compression= 119.79     *
+*............................................................................*
+*Br   42 :zdc_ZdcModuleMaxADC : zdc_ZdcModuleMaxADC[2][4]/F                  *
+*Entries :   100000 : Total  Size=    3211382 bytes  File Size  =    1652674 *
+*Baskets :      101 : Basket Size=      32000 bytes  Compression=   1.94     *
+*............................................................................*
+*Br   43 :zdc_ZdcModuleTruthTotal : zdc_ZdcModuleTruthTotal[2][7]/F          *
+*Entries :   100000 : Total  Size=    5620277 bytes  File Size  =    4691802 *
+*Baskets :      176 : Basket Size=      32000 bytes  Compression=   1.20     *
+*............................................................................*
+*Br   44 :zdc_ZdcModuleTruthInivsible : zdc_ZdcModuleTruthInvisible[2][7]/F  *
+*Entries :   100000 : Total  Size=    5620997 bytes  File Size  =    4688371 *
+*Baskets :      176 : Basket Size=      32000 bytes  Compression=   1.20     *
+*............................................................................*
+*Br   45 :zdc_ZdcModuleTruthEM : zdc_ZdcModuleTruthEM[2][7]/F                *
+*Entries :   100000 : Total  Size=    5619737 bytes  File Size  =    4616561 *
+*Baskets :      176 : Basket Size=      32000 bytes  Compression=   1.22     *
+*............................................................................*
+*Br   46 :zdc_ZdcModuleTruthNonEM : zdc_ZdcModuleTruthNonEM[2][7]/F          *
+*Entries :   100000 : Total  Size=    5620277 bytes  File Size  =    4659601 *
+*Baskets :      176 : Basket Size=      32000 bytes  Compression=   1.21     *
+*............................................................................*
+*Br   47 :zdc_ZdModulecTruthEscaped : zdc_ZdcModuleTruthEscaped[2][7]/F      *
+*Entries :   100000 : Total  Size=    5620637 bytes  File Size  =     542082 *
+*Baskets :      176 : Basket Size=      32000 bytes  Compression=  10.36     *
+*............................................................................*
+*Br   48 :zdc_ZdcModuleTruthNphotons : zdc_ZdcModuleTruthNphotons[2][7]/i    *
+*Entries :   100000 : Total  Size=    5620817 bytes  File Size  =    3312731 *
+*Baskets :      176 : Basket Size=      32000 bytes  Compression=   1.70     *
+*............................................................................*
+*Br   49 :zdc_RpdModuleTruthNphotons : zdc_RpdModuleTruthNphotons[2][16]/i   *
+*Entries :   100000 : Total  Size=   12847035 bytes  File Size  =    2907040 *
+*Baskets :      402 : Basket Size=      32000 bytes  Compression=   4.42     *
+*............................................................................*
+*Br   50 :zdc_ZdcTruthTotal : zdc_ZdcTruthTotal[2]/F                         *
+*Entries :   100000 : Total  Size=     803141 bytes  File Size  =     717661 *
+*Baskets :       26 : Basket Size=      32000 bytes  Compression=   1.12     *
+*............................................................................*
+*Br   51 :zdc_ZdcTruthInvisible : zdc_ZdcTruthInvisible[2]/F                 *
+*Entries :   100000 : Total  Size=     803261 bytes  File Size  =     734738 *
+*Baskets :       26 : Basket Size=      32000 bytes  Compression=   1.09     *
+*............................................................................*
+*Br   52 :zdc_ZdcTruthEM : zdc_ZdcTruthEM[2]/F                               *
+*Entries :   100000 : Total  Size=     803051 bytes  File Size  =     717068 *
+*Baskets :       26 : Basket Size=      32000 bytes  Compression=   1.12     *
+*............................................................................*
+*Br   53 :zdc_ZdcTruthNonEM : zdc_ZdcTruthNonEM[2]/F                         *
+*Entries :   100000 : Total  Size=     803141 bytes  File Size  =     703795 *
+*Baskets :       26 : Basket Size=      32000 bytes  Compression=   1.14     *
+*............................................................................*
+*Br   54 :zdc_ZdcTruthEscaped : zdc_ZdcTruthEscaped[2]/F                     *
+*Entries :   100000 : Total  Size=     803201 bytes  File Size  =     304025 *
+*Baskets :       26 : Basket Size=      32000 bytes  Compression=   2.64     *
+*............................................................................*
+*Br   55 :zdc_ZdcTruthParticlePosx : vector<float>                           *
+*Entries :   100000 : Total  Size=    3013439 bytes  File Size  =     205842 *
+*Baskets :      107 : Basket Size=      32000 bytes  Compression=  14.63     *
+*............................................................................*
+*Br   56 :zdc_ZdcTruthParticlePosy : vector<float>                           *
+*Entries :   100000 : Total  Size=    3013439 bytes  File Size  =     205842 *
+*Baskets :      107 : Basket Size=      32000 bytes  Compression=  14.63     *
+*............................................................................*
+*Br   57 :zdc_ZdcTruthParticlePosz : vector<float>                           *
+*Entries :   100000 : Total  Size=    3013439 bytes  File Size  =     205842 *
+*Baskets :      107 : Basket Size=      32000 bytes  Compression=  14.63     *
+*............................................................................*
+*Br   58 :zdc_ZdcTruthParticleTime : vector<float>                           *
+*Entries :   100000 : Total  Size=    3013439 bytes  File Size  =     205842 *
+*Baskets :      107 : Basket Size=      32000 bytes  Compression=  14.63     *
+*............................................................................*
+*Br   59 :zdc_ZdcTruthParticlePx : vector<float>                             *
+*Entries :   100000 : Total  Size=    3013217 bytes  File Size  =    1043888 *
+*Baskets :      107 : Basket Size=      32000 bytes  Compression=   2.88     *
+*............................................................................*
+*Br   60 :zdc_ZdcTruthParticlePy : vector<float>                             *
+*Entries :   100000 : Total  Size=    3013217 bytes  File Size  =    1017198 *
+*Baskets :      107 : Basket Size=      32000 bytes  Compression=   2.96     *
+*............................................................................*
+*Br   61 :zdc_ZdcTruthParticlePz : vector<float>                             *
+*Entries :   100000 : Total  Size=    3013217 bytes  File Size  =     926204 *
+*Baskets :      107 : Basket Size=      32000 bytes  Compression=   3.25     *
+*............................................................................*
+*Br   62 :zdc_ZdcTruthParticleEnergy : vector<float>                         *
+*Entries :   100000 : Total  Size=    3013661 bytes  File Size  =     926488 *
+*Baskets :      107 : Basket Size=      32000 bytes  Compression=   3.25     *
+*............................................................................*
+*Br   63 :zdc_RpdChannelBaseline : zdc_RpdChannelBaseline[2][16]/F           *
+*Entries :   100000 : Total  Size=   12845411 bytes  File Size  =     979265 *
+*Baskets :      402 : Basket Size=      32000 bytes  Compression=  13.11     *
+*............................................................................*
+*Br   64 :zdc_RpdChannelPileupExpFitParams :                                 *
+*         | zdc_RpdChannelPileupExpFitParams[2][16][2]/F                     *
+*Entries :   100000 : Total  Size=   25698887 bytes  File Size  =     220235 *
+*Baskets :      807 : Basket Size=      32000 bytes  Compression= 116.61     *
+*............................................................................*
+*Br   65 :zdc_RpdChannelPileupStretchedExpFitParams :                        *
+*         | zdc_RpdChannelPileupStretchedExpFitParams[2][16][3]/F            *
+*Entries :   100000 : Total  Size=   38558324 bytes  File Size  =     340990 *
+*Baskets :     1205 : Basket Size=      32000 bytes  Compression= 113.01     *
+*............................................................................*
+*Br   66 :zdc_RpdChannelPileupExpFitParamErrs :                              *
+*         | zdc_RpdChannelPileupExpFitParamErrs[2][16][2]/F                  *
+*Entries :   100000 : Total  Size=   25701320 bytes  File Size  =     222656 *
+*Baskets :      807 : Basket Size=      32000 bytes  Compression= 115.36     *
+*............................................................................*
+*Br   67 :zdc_RpdChannelPileupStretchedExpFitParamErrs :                     *
+*         | zdc_RpdChannelPileupStretchedExpFitParamErrs[2][16][3]/F         *
+*Entries :   100000 : Total  Size=   38561951 bytes  File Size  =     344605 *
+*Baskets :     1205 : Basket Size=      32000 bytes  Compression= 111.83     *
+*............................................................................*
+*Br   68 :zdc_RpdChannelPileupExpFitMSE :                                    *
+*         | zdc_RpdChannelPileupExpFitMSE[2][16]/F                           *
+*Entries :   100000 : Total  Size=   12848253 bytes  File Size  =     108885 *
+*Baskets :      402 : Basket Size=      32000 bytes  Compression= 117.92     *
+*............................................................................*
+*Br   69 :zdc_RpdChannelPileupStretchedExpFitMSE :                           *
+*         | zdc_RpdChannelPileupStretchedExpFitMSE[2][16]/F                  *
+*Entries :   100000 : Total  Size=   12851907 bytes  File Size  =     112503 *
+*Baskets :      402 : Basket Size=      32000 bytes  Compression= 114.16     *
+*............................................................................*
+*Br   70 :zdc_RpdChannelAmplitude : zdc_RpdChannelAmplitude[2][16]/F         *
+*Entries :   100000 : Total  Size=   12845817 bytes  File Size  =    2531298 *
+*Baskets :      402 : Basket Size=      32000 bytes  Compression=   5.07     *
+*............................................................................*
+*Br   71 :zdc_RpdChannelAmplitudeCalib :                                     *
+*         | zdc_RpdChannelAmplitudeCalib[2][16]/F                            *
+*Entries :   100000 : Total  Size=   12847847 bytes  File Size  =    2533308 *
+*Baskets :      402 : Basket Size=      32000 bytes  Compression=   5.07     *
+*............................................................................*
+*Br   72 :zdc_RpdChannelMaxADC : zdc_RpdChannelMaxADC[2][16]/F               *
+*Entries :   100000 : Total  Size=   12844599 bytes  File Size  =    2453600 *
+*Baskets :      402 : Basket Size=      32000 bytes  Compression=   5.23     *
+*............................................................................*
+*Br   73 :zdc_RpdChannelMaxADCCalib : zdc_RpdChannelMaxADCCalib[2][16]/F     *
+*Entries :   100000 : Total  Size=   12846629 bytes  File Size  =    2455610 *
+*Baskets :      402 : Basket Size=      32000 bytes  Compression=   5.23     *
+*............................................................................*
+*Br   74 :zdc_RpdChannelMaxSample : zdc_RpdChannelMaxSample[2][16]/i         *
+*Entries :   100000 : Total  Size=   12845817 bytes  File Size  =     981874 *
+*Baskets :      402 : Basket Size=      32000 bytes  Compression=  13.07     *
+*............................................................................*
+*Br   75 :zdc_RpdChannelStatus : zdc_RpdChannelStatus[2][16]/i               *
+*Entries :   100000 : Total  Size=   12844599 bytes  File Size  =     973731 *
+*Baskets :      402 : Basket Size=      32000 bytes  Compression=  13.18     *
+*............................................................................*
+*Br   76 :zdc_RpdChannelPileupFrac : zdc_RpdChannelPileupFrac[2][16]/F       *
+*Entries :   100000 : Total  Size=   12846223 bytes  File Size  =     106875 *
+*Baskets :      402 : Basket Size=      32000 bytes  Compression= 120.12     *
+*............................................................................*
+*Br   77 :zdc_RpdSideStatus : zdc_RpdSideStatus[2]/i                         *
+*Entries :   100000 : Total  Size=     803141 bytes  File Size  =      28798 *
+*Baskets :       26 : Basket Size=      32000 bytes  Compression=  27.86     *
+*............................................................................*
+*Br   78 :zdc_centroidEventValid : zdc_centroidEventValid/B                  *
+*Entries :   100000 : Total  Size=     100915 bytes  File Size  =        935 *
+*Baskets :        4 : Basket Size=      32000 bytes  Compression= 107.35     *
+*............................................................................*
+*Br   79 :zdc_centroidStatus : zdc_centroidStatus[2]/i                       *
+*Entries :   100000 : Total  Size=     803171 bytes  File Size  =      32055 *
+*Baskets :       26 : Basket Size=      32000 bytes  Compression=  25.03     *
+*............................................................................*
+*Br   80 :zdc_RPDChannelSubtrAmp : zdc_RPDChannelSubtrAmp[2][16]/F           *
+*Entries :   100000 : Total  Size=   12845411 bytes  File Size  =     473548 *
+*Baskets :      402 : Basket Size=      32000 bytes  Compression=  27.11     *
+*............................................................................*
+*Br   81 :zdc_RPDSubtrAmpSum : zdc_RPDSubtrAmpSum[2]/F                       *
+*Entries :   100000 : Total  Size=     803171 bytes  File Size  =      46795 *
+*Baskets :       26 : Basket Size=      32000 bytes  Compression=  17.14     *
+*............................................................................*
+*Br   82 :zdc_xCentroidPreGeomCorPreAvgSubtr :                               *
+*         | zdc_xCentroidPreGeomCorPreAvgSubtr[2]/F                          *
+*Entries :   100000 : Total  Size=     803651 bytes  File Size  =      59429 *
+*Baskets :       26 : Basket Size=      32000 bytes  Compression=  13.51     *
+*............................................................................*
+*Br   83 :zdc_yCentroidPreGeomCorPreAvgSubtr :                               *
+*         | zdc_yCentroidPreGeomCorPreAvgSubtr[2]/F                          *
+*Entries :   100000 : Total  Size=     803651 bytes  File Size  =      58898 *
+*Baskets :       26 : Basket Size=      32000 bytes  Compression=  13.63     *
+*............................................................................*
+*Br   84 :zdc_xCentroidPreAvgSubtr : zdc_xCentroidPreAvgSubtr[2]/F           *
+*Entries :   100000 : Total  Size=     803351 bytes  File Size  =      59139 *
+*Baskets :       26 : Basket Size=      32000 bytes  Compression=  13.57     *
+*............................................................................*
+*Br   85 :zdc_yCentroidPreAvgSubtr : zdc_yCentroidPreAvgSubtr[2]/F           *
+*Entries :   100000 : Total  Size=     803351 bytes  File Size  =      58619 *
+*Baskets :       26 : Basket Size=      32000 bytes  Compression=  13.69     *
+*............................................................................*
+*Br   86 :zdc_xCentroid : zdc_xCentroid[2]/F                                 *
+*Entries :   100000 : Total  Size=     803021 bytes  File Size  =      58881 *
+*Baskets :       26 : Basket Size=      32000 bytes  Compression=  13.62     *
+*............................................................................*
+*Br   87 :zdc_yCentroid : zdc_yCentroid[2]/F                                 *
+*Entries :   100000 : Total  Size=     803021 bytes  File Size  =      58333 *
+*Baskets :       26 : Basket Size=      32000 bytes  Compression=  13.75     *
+*............................................................................*
+*Br   88 :zdc_xRowCentroid : zdc_xRowCentroid[2][4]/F                        *
+*Entries :   100000 : Total  Size=    3211067 bytes  File Size  =     161893 *
+*Baskets :      101 : Basket Size=      32000 bytes  Compression=  19.82     *
+*............................................................................*
+*Br   89 :zdc_yColCentroid : zdc_yColCentroid[2][4]/F                        *
+*Entries :   100000 : Total  Size=    3211067 bytes  File Size  =     172057 *
+*Baskets :      101 : Basket Size=      32000 bytes  Compression=  18.65     *
+*............................................................................*
+*Br   90 :zdc_reactionPlaneAngle : zdc_reactionPlaneAngle[2]/F               *
+*Entries :   100000 : Total  Size=     803291 bytes  File Size  =      58352 *
+*Baskets :       26 : Basket Size=      32000 bytes  Compression=  13.75     *
+*............................................................................*
+*Br   91 :zdc_cosDeltaReactionPlaneAngle : zdc_cosDeltaReactionPlaneAngle/F  *
+*Entries :   100000 : Total  Size=     401965 bytes  File Size  =       3471 *
+*Baskets :       13 : Basket Size=      32000 bytes  Compression= 115.62     *
+*............................................................................*
