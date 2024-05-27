@@ -2,7 +2,6 @@
 #include "TTreeReader.h"
 #include "TTreeReaderValue.h"
 #include "TTreeReaderArray.h"
-#include "TH2D.h"
 
 #include "ZDCModule.h"
 
@@ -21,8 +20,6 @@ std::string getSideString(TTreeReaderArray<float> const& array, Side const side,
 
 inline void print_truth() {
   TFile* file = TFile::Open(SIM_FILE_PATH.c_str());
-  
-  // TH2D *h = new TH2D();
 
   TTreeReader reader("zdcTree", file);
   TTreeReaderArray<float> zdc_ZdcModuleTruthTotal(reader, "zdc_ZdcModuleTruthTotal");
