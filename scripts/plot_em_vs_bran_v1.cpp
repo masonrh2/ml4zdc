@@ -1,7 +1,7 @@
 #include "TFile.h"
 #include "TTreeReader.h"
 #include "TTreeReaderArray.h"
-#include "TH2.h" // 2-dimensional histograms
+#include "TH2.h" // 2-dimensional histograms, for full docs see https://root.cern.ch/doc/master/classTH2.html
 
 #include "../include/ZDCModule.h"
 #include "../include/Axis.h"

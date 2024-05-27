@@ -1,4 +1,4 @@
-#include "ROOT/RDataFrame.hxx" // for comprehensive docs, see https://root.cern/doc/master/classROOT_1_1RDataFrame.html
+#include "ROOT/RDataFrame.hxx" // for full docs, see https://root.cern/doc/master/classROOT_1_1RDataFrame.html
 
 #include "../include/Axis.h"
 #include "../include/ZDCModule.h"
@@ -21,7 +21,7 @@ std::function<float(ROOT::VecOps::RVec<float> const& vec)> getVectorUnpackerFunc
  * @brief plot EM module truth vs BRAN truth
  * this version is different and plots with RDataFrame, which is a new addition to ROOT and can be much faster
  * I tend to prefer this way, but it can sometimes be tricky to get what you want
- * run with, for example: root -b -q -l plot_em_vs_bran_v1.cpp
+ * run with, for example: root -b -q -l plot_em_vs_bran_v2.cpp
  */
 inline void plot_em_vs_bran_v2() {
   // ROOT will use multiple threads where possible
