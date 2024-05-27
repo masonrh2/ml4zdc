@@ -27,7 +27,7 @@ inline void plot_em_vs_bran_v1() {
 
   std::array<TH2D*, 2> hEMVsBRAN {};
   for (auto const& side : SIDES) {
-    hEMVsBRAN.at(side) = new TH2D(Form("side%c_EMVsBRAN", getSideLabel(side)), ";EM Truth Energy [?];BRAN Truth Energy [?];Count", BINS(axis::EMTruth.withBins(32)), BINS(axis::BRANTruth.withBins(32)));
+    hEMVsBRAN.at(side) = new TH2D(Form("side%c_EMVsBRAN", getSideLabel(side)), ";EM Truth Energy [MeV];BRAN Truth Energy [MeV];Count", BINS(axis::EMTruth.withBins(32)), BINS(axis::BRANTruth.withBins(32)));
   }
 
   while (reader.Next()) {

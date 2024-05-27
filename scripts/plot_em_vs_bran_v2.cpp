@@ -41,7 +41,7 @@ inline void plot_em_vs_bran_v2() {
     );
     // make histogram from these new branches
     hEMVsBRAN.at(side) = dataframeUnpacked.Histo2D<float, float>(
-      {Form("side%c_EMVsBRAN", getSideLabel(side)), ";EM Truth Energy [?];BRAN Truth Energy [?];Count", BINS(axis::EMTruth.withBins(32)), BINS(axis::BRANTruth.withBins(32))},
+      {Form("side%c_EMVsBRAN", getSideLabel(side)), ";EM Truth Energy [MeV];BRAN Truth Energy [MeV];Count", BINS(axis::EMTruth.withBins(32)), BINS(axis::BRANTruth.withBins(32))},
       "em_truth", "bran_truth"
     );
   }
