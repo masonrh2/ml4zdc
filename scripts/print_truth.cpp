@@ -3,12 +3,12 @@
 #include "TTreeReaderValue.h"
 #include "TTreeReaderArray.h"
 
-#include "ZDCModule.h"
+#include "../include/ZDCModule.h"
 
 unsigned int constexpr MAX_EVENTS = 10;
-std::string const SIM_FILE_PATH = "ZDC_sim_1n_100k.root";
+std::string const SIM_FILE_PATH = "../data/ZDC_sim_1n_100k.root";
 
-std::string getSideString(TTreeReaderArray<float> const& array, Side const side, unsigned int const precision = 2) {
+std::string getSideString(TTreeReaderArray<float> const& array, unsigned int const side, unsigned int const precision = 2) {
   std::string tmp = "";
   unsigned int const sideSize = array.GetSize()/2;
   for (unsigned int i = 0; i < sideSize; i++) {
