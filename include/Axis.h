@@ -1,3 +1,7 @@
+#pragma once
+
+#include "ZDCModule.h"
+
 namespace axis {
   struct Axis {
     int const nbins;
@@ -9,11 +13,15 @@ namespace axis {
   };
 
   Axis constexpr EMTruth {64, 0, 2e5};
-  Axis constexpr HAD1Truth {64, 0, 1e6};
-  Axis constexpr HAD2Truth {64, 0, 1e6};
-  Axis constexpr HAD3Truth {64, 0, 1e6};
-  Axis constexpr RPDTruth {64, 0, 1e6};
+  Axis constexpr HAD1Truth {64, 0, 2e5};
+  Axis constexpr HAD2Truth {64, 0, 2e5};
+  Axis constexpr HAD3Truth {64, 0, 2e5};
+  Axis constexpr RPDTruth {64, 0, 1e5};
   Axis constexpr BRANTruth {64, 0, 1e6};
+  std::array<Axis, N_SIM_MODULES_USED> constexpr moduleAxes = {EMTruth, HAD1Truth, HAD2Truth, HAD3Truth, RPDTruth, BRANTruth};
+
+  Axis constexpr xAtRPD {64, -25, 25};
+  Axis constexpr yAtRPD {64, -25, 25};
 }
 
 #define BINS(axis) axis.nbins, axis.xmin, axis.xmax

@@ -11,7 +11,7 @@ std::string const MODULE_TRUTH_ENERGIES_BRANCH = "zdc_ZdcModuleTruthTotal";
 /**
  * @brief get a function that picks an element at a specified index given a vector
  */
-std::function<float(ROOT::VecOps::RVec<float> const& vec)> getVectorUnpackerFunc(unsigned int const index) {
+inline std::function<float(ROOT::VecOps::RVec<float> const& vec)> getVectorUnpackerFunc(unsigned int const index) {
   return [index] (ROOT::VecOps::RVec<float> const& vec) {
     return vec.at(index);
   };

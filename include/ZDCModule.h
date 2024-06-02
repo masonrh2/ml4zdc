@@ -1,3 +1,5 @@
+#pragma once
+
 #include <array>
 #include <stdexcept>
 
@@ -25,13 +27,14 @@ enum struct RecoModule : unsigned int {
 };
 
 unsigned int constexpr N_SIM_MODULES = 7;
+unsigned int constexpr N_SIM_MODULES_USED = 6;
 enum struct SimModule : unsigned int {
   EM = 0, HAD1 = 1, HAD2 = 2, HAD3 = 3, RPD = 4, BRAN = 5
 };
 
 inline unsigned int getModuleIndex(unsigned int const side, unsigned int const index, unsigned int const sideSize) {
   checkSide(side);
-  return static_cast<unsigned int>(side)*sideSize + index;
+  return side*sideSize + index;
 };
 
 inline unsigned int getModuleIndex(unsigned int const side, RecoModule const mod) {
