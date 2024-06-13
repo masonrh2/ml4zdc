@@ -61,6 +61,7 @@ inline void plot_truth_correlations() {
   ROOT::RDataFrame dataframe("zdcTree", SIM_FILE_PATH);
 
   std::array<std::array<std::array<ROOT::RDF::RResultPtr< ::TH2D>, N_SIM_MODULES_USED>, N_SIM_MODULES_USED>, 2> hCorrelation {};
+  std::array<std::array<ROOT::RDF::RResultPtr< ::TH1D>, N_SIM_MODULES_USED>, 2> hDistribution {};
 
   for (auto const& side : SIDES) {
     ROOT::RDF::RInterface<ROOT::Detail::RDF::RLoopManager, void> dataframeUnpacked = dataframe;
@@ -70,7 +71,16 @@ inline void plot_truth_correlations() {
       );
     }
     for (unsigned int i = 0; i < N_SIM_MODULES_USED; i++) {
+      hDistribution.at(side).at(i) = dataframeUnpacked.Histo1D<float>(
+        {
+          Form("side%c_%s", getSideLabel(side), MODULE_NAMES.at(i).c_str()),
+          Form(";%s Truth Energy [MeV];Count", MODULE_NAMES.at(i).c_str()),
+          BINS(axis::moduleAxes.at(i).withBins(48))
+        },
+        MODULE_NAMES.at(i) + "_truth"
+      );
       for (unsigned int j = 0; j < N_SIM_MODULES_USED; j++) {
+        if (i == j) continue;
         hCorrelation.at(side).at(i).at(j) = dataframeUnpacked.Histo2D<float, float>(
           {
             Form("side%c_%sVs%s", getSideLabel(side), MODULE_NAMES.at(i).c_str(), MODULE_NAMES.at(j).c_str()),
@@ -103,14 +113,22 @@ inline void plot_truth_correlations() {
         drawText(MODULE_NAMES.at(MODULE_PLOT_ORDER.at(mod)), 0.3, 45, kHAlignCenter + kVAlignCenter);
         continue;
       } // else plot
-      gPad->SetLogz();
-      ROOT::RDF::RResultPtr< ::TH2D> & hist = hCorrelation.at(side).at(MODULE_PLOT_ORDER.at(i - 1)).at(MODULE_PLOT_ORDER.at(j - 1));
-      hist->Draw("COLZ");
-      TProfile * prof = hist->ProfileX();
-      prof->SetMarkerStyle(kFullCircle);
-      prof->SetMarkerSize(0.5);
-      prof->Draw("SAME");
-      drawText(Form("%.2f", hist->GetCorrelationFactor()));
+      if (i == j) {
+        // distribution plot
+        // gPad->SetLogy();
+        ROOT::RDF::RResultPtr< ::TH1D> & hist = hDistribution.at(side).at(MODULE_PLOT_ORDER.at(i - 1));
+        hist->Draw();
+      } else {
+        // correlation plot
+        gPad->SetLogz();
+        ROOT::RDF::RResultPtr< ::TH2D> & hist = hCorrelation.at(side).at(MODULE_PLOT_ORDER.at(i - 1)).at(MODULE_PLOT_ORDER.at(j - 1));
+        hist->Draw("COLZ");
+        TProfile * prof = hist->ProfileX();
+        prof->SetMarkerStyle(kFullCircle);
+        prof->SetMarkerSize(0.5);
+        prof->Draw("SAME");
+        drawText(Form("%.2f", hist->GetCorrelationFactor()));
+      }
     }
     canvas->Write();
   }
