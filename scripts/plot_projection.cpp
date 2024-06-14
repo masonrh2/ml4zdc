@@ -3,7 +3,8 @@
 #include "../include/Axis.h"
 #include "../include/ZDCModule.h"
 
-std::string const SIM_FILE_PATH = "../data/ZDC_sim_1n_100k.root";
+std::string const SIM_FILE_PATH = "../data/SingleNeutronNew_2024-05-19_NTUP.root";
+// std::string const SIM_FILE_PATH = "../data/ZDC_sim_1n_100k.root";
 std::string const OUT_FILE_PATH = "../plots/projection.root";
 
 namespace particleBranches {

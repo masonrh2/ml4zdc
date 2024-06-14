@@ -10,7 +10,10 @@
 #include "TPaveText.h"
 #include "TStyle.h"
 
-std::string const SIM_FILE_PATH = "../data/ZDC_sim_1n_100k.root";
+std::vector<std::pair<std::string, std::string>> const SIM_FILE_PATHS = {
+  {"brokenFermi", "../data/ZDC_sim_1n_100k.root"},
+  {"correctFermi", "../data/SingleNeutronNew_2024-05-19_NTUP.root"},
+};
 std::string const OUT_FILE_PATH = "../plots/truth_correlations.root";
 
 std::string const MODULE_TRUTH_ENERGIES_BRANCH = "zdc_ZdcModuleTruthTotal";
@@ -53,12 +56,8 @@ inline void drawText(
   pt->Draw();
 }
 
-/**
- * @brief 
- */
-inline void plot_truth_correlations() {
-  ROOT::EnableImplicitMT();
-  ROOT::RDataFrame dataframe("zdcTree", SIM_FILE_PATH);
+void plot_single(std::pair<std::string, std::string> const& tagAndFile) {
+  ROOT::RDataFrame dataframe("zdcTree", tagAndFile.second);
 
   std::array<std::array<std::array<ROOT::RDF::RResultPtr< ::TH2D>, N_SIM_MODULES_USED>, N_SIM_MODULES_USED>, 2> hCorrelation {};
   std::array<std::array<ROOT::RDF::RResultPtr< ::TH1D>, N_SIM_MODULES_USED>, 2> hDistribution {};
@@ -93,10 +92,9 @@ inline void plot_truth_correlations() {
     }
   }
 
-  TFile* plotFile = TFile::Open(OUT_FILE_PATH.c_str(), "RECREATE");
   unsigned int const M = N_SIM_MODULES_USED + 1;
   for (auto const& side : SIDES) {
-    TCanvas * canvas = new TCanvas(Form("side%c_correlation", SIDE_LABELS.at(side)));
+    TCanvas * canvas = new TCanvas(Form("%s_side%c_correlation", tagAndFile.first.c_str(), SIDE_LABELS.at(side)));
     canvas->Divide(M, M);
     for (unsigned int k = 0; k < M*M; k++) {
       canvas->cd(k + 1);
@@ -131,6 +129,18 @@ inline void plot_truth_correlations() {
       }
     }
     canvas->Write();
+  }
+}
+
+/**
+ * @brief 
+ */
+ void plot_truth_correlations() {
+  ROOT::EnableImplicitMT();
+  TFile* plotFile = TFile::Open(OUT_FILE_PATH.c_str(), "RECREATE");
+  for (auto const& tagAndFile : SIM_FILE_PATHS) {
+    plotFile->mkdir(tagAndFile.first.c_str())->cd();
+    plot_single(tagAndFile);
   }
   plotFile->Close();
 }
