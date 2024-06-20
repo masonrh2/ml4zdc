@@ -6,7 +6,7 @@
 #include "../include/ZDCModule.h"
 #include "../include/Axis.h"
 
-std::string const SIM_FILE_PATH = "./data/ZDC_sim_1n_100k.root";
+std::string const SIM_FILE_PATH = "./data/SingleNeutronNew_2024-05-19_NTUP.root";
 std::string const OUT_FILE_PATH = "./plots/had1_vs_bran_v1.root";
 
 /**
@@ -27,7 +27,7 @@ inline void plot_had1_vs_bran() {
 
   std::array<TH2D*, 2> hHAD1VsBRAN {};
   for (auto const& side : SIDES) {
-    hHAD1VsBRAN.at(side) = new TH2D(Form("side%c_HAD1VsBRAN", getSideLabel(side)), ";HAD1 Truth Energy [MeV];BRAN Truth Energy [MeV];Count", BINS(axis::EMTruth.withBins(32)), BINS(axis::BRANTruth.withBins(32)));
+    hHAD1VsBRAN.at(side) = new TH2D(Form("side%c_HAD1VsBRAN", getSideLabel(side)), ";HAD1 Truth Energy [MeV];BRAN Truth Energy [MeV];Count", BINS(axis::HAD1Truth.withBins(32)), BINS(axis::BRANTruth.withBins(32)));
   }
 
   while (reader.Next()) {

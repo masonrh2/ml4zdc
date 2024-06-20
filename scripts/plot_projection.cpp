@@ -3,8 +3,8 @@
 #include "../include/Axis.h"
 #include "../include/ZDCModule.h"
 
-std::string const SIM_FILE_PATH = "../data/ZDC_sim_1n_100k.root";
-std::string const OUT_FILE_PATH = "../plots/projection.root";
+std::string const SIM_FILE_PATH = "./data/SingleNeutronNew_2024-05-19_NTUP.root";
+std::string const OUT_FILE_PATH = "./plots/projection.root";
 
 namespace particleBranches {
   std::string const x = "zdc_ZdcTruthParticlePosx";
@@ -63,9 +63,10 @@ unsigned int getParticleSelectorFunc(ROOT::VecOps::RVec<ParticleType> const& par
   }
   if (indices.size() == 0) {
     throw std::runtime_error("no particles match side " + std::to_string(getSideLabel(side)) + " selection!");
-  } else if (indices.size() > 1) {
-    throw std::runtime_error(std::to_string(indices.size()) + " > 1 particles match side " + std::to_string(getSideLabel(side)) + " selection!");
-  }
+  } 
+  // else if (indices.size() > 1) {
+  //   throw std::runtime_error(std::to_string(indices.size()) + " > 1 particles match side " + std::to_string(getSideLabel(side)) + " selection!");
+  // }
   return indices.at(0);
 }
 
