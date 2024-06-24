@@ -3,8 +3,10 @@
 #include "../include/Axis.h"
 #include "../include/ZDCModule.h"
 
-std::string const SIM_FILE_PATH = "../data/SingleNeutronNew_2024-05-19_NTUP.root";
-// std::string const SIM_FILE_PATH = "../data/ZDC_sim_1n_100k.root";
+// right now this file will only process single neutron events,
+// but it can be easily modified to calculate the centroid of any number of neutrons
+\
+std::string const SIM_FILE_PATH = "../data/SingleNeutronNew.2024.05.19_NTUP.root";
 std::string const OUT_FILE_PATH = "../plots/projection.root";
 
 namespace particleBranches {
@@ -63,9 +65,9 @@ unsigned int getParticleSelectorFunc(ROOT::VecOps::RVec<ParticleType> const& par
     }
   }
   if (indices.size() == 0) {
-    throw std::runtime_error("no particles match side " + std::to_string(getSideLabel(side)) + " selection!");
+    throw std::runtime_error("no particles match side " + std::string(1, getSideLabel(side)) + " selection!");
   } else if (indices.size() > 1) {
-    throw std::runtime_error(std::to_string(indices.size()) + " > 1 particles match side " + std::to_string(getSideLabel(side)) + " selection!");
+    throw std::runtime_error(std::to_string(indices.size()) + " > 1 particles match side " + std::string(1, getSideLabel(side)) + " selection!");
   }
   return indices.at(0);
 }
@@ -126,6 +128,13 @@ std::function<ROOT::VecOps::RVec<float>(
   };
 }
 
+template <typename T>
+inline std::function<bool(ROOT::VecOps::RVec<T> const& vec)> filterVectorSize(unsigned int const size) {
+  return [size] (ROOT::VecOps::RVec<T> const& vec) {
+    return vec.size() == size;
+  };
+}
+
 /**
  * @brief 
  */
@@ -134,7 +143,10 @@ inline void plot_projection() {
   // this is great for large files, probably not much benefit for 100k events, though
   ROOT::EnableImplicitMT();
 
-  ROOT::RDataFrame dataframe("zdcTree", SIM_FILE_PATH);
+  auto dataframe = ROOT::RDataFrame("zdcTree", SIM_FILE_PATH).Filter(
+    filterVectorSize<float>(4), {particleBranches::pz}, "4 truth particles"
+  );
+  dataframe.Report()->Print();
 
   std::array<ROOT::RDF::RResultPtr< ::TH2D>, 2> hProjection {};
 
@@ -159,7 +171,7 @@ inline void plot_projection() {
     );
     // make histogram from these new branches
     hProjection.at(side) = dataframeUnpacked.Histo2D<float, float>(
-      {Form("side%c_projection", getSideLabel(side)), ";x [mm];y [mm];Count", BINS(axis::xAtRPD.withBins(256)), BINS(axis::yAtRPD.withBins(256))},
+      {Form("side%c_projection", getSideLabel(side)), ";x [mm];y [mm];Count", BINS(axis::xAtRPD.withBins(64)), BINS(axis::yAtRPD.withBins(64))},
       "projectionx", "projectiony"
     );
   }

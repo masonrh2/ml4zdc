@@ -11,8 +11,7 @@
 #include "TStyle.h"
 
 std::vector<std::pair<std::string, std::string>> const SIM_FILE_PATHS = {
-  {"brokenFermi", "../data/ZDC_sim_1n_100k.root"},
-  {"correctFermi", "../data/SingleNeutronNew_2024-05-19_NTUP.root"},
+  {"correctFermi", "../data/SingleNeutronNew.2024-05-19_NTUP.root"},
 };
 std::string const OUT_FILE_PATH = "../plots/truth_correlations.root";
 

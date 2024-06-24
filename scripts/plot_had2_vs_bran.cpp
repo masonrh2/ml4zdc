@@ -6,8 +6,8 @@
 #include "../include/ZDCModule.h"
 #include "../include/Axis.h"
 
-std::string const SIM_FILE_PATH = "./data/ZDC_sim_1n_100k.root";
-std::string const OUT_FILE_PATH = "./plots/had2_vs_bran.root";
+std::string const SIM_FILE_PATH = "../data/SingleNeutronNew.2024.05.19_NTUP.root";
+std::string const OUT_FILE_PATH = "../plots/had2_vs_bran.root";
 
 /**
  * @brief plot EM module truth vs BRAN truth

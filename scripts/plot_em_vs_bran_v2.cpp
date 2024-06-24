@@ -3,7 +3,7 @@
 #include "../include/Axis.h"
 #include "../include/ZDCModule.h"
 
-std::string const SIM_FILE_PATH = "../data/ZDC_sim_1n_100k.root";
+std::string const SIM_FILE_PATH = "../data/SingleNeutronNew.2024.05.19_NTUP.root";
 std::string const OUT_FILE_PATH = "../plots/em_vs_bran_v2.root";
 
 std::string const MODULE_TRUTH_ENERGIES_BRANCH = "zdc_ZdcModuleTruthTotal";
