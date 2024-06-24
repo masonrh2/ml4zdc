@@ -1,35 +1,25 @@
 #include "ROOT/RDataFrame.hxx" // for full docs, see https://root.cern/doc/master/classROOT_1_1RDataFrame.html
 
-#include "../include/Axis.h"
-#include "../include/ZDCModule.h"
+#include "../include/Axis.hpp"
+#include "../include/ZDCModule.hpp"
 #include "TAttMarker.h"
 #include "TAttText.h"
 #include "TCanvas.h"
-#include "TColor.h"
 #include "TProfile.h"
 #include "TPaveText.h"
-#include "TStyle.h"
 
-std::vector<std::pair<std::string, std::string>> const SIM_FILE_PATHS = {
-  {"correctFermi", "../data/SingleNeutronNew.2024-05-19_NTUP.root"},
+struct SimulationConfig {
+  std::string tag;
+  std::string path;
+  std::array<axis::Axis, N_SIM_MODULES_USED> const& axes;
 };
+
+std::vector<SimulationConfig> const SIM_CONFIGS = {
+  {"1n", "../data/SingleNeutronNew.2024.05.19_NTUP.root", axis::singleNeutron::moduleAxes},
+  {"40n", "../data/40Neutrons_NTUP.root", axis::fortyNeutron::moduleAxes},
+};
+
 std::string const OUT_FILE_PATH = "../plots/truth_correlations.root";
-
-std::string const MODULE_TRUTH_ENERGIES_BRANCH = "zdc_ZdcModuleTruthTotal";
-
-std::array<std::string, N_SIM_MODULES_USED> const MODULE_NAMES = {"EM", "HAD1" ,"HAD2" ,"HAD3" ,"RPD" ,"BRAN"};
-
-// plot in order of location in detector, closest to beam first
-std::array<unsigned int, N_SIM_MODULES_USED> constexpr MODULE_PLOT_ORDER = {0, 4, 5, 1, 2, 3};
-
-/**
- * @brief get a function that picks an element at a specified index given a vector
- */
-inline std::function<float(ROOT::VecOps::RVec<float> const& vec)> getVectorUnpackerFunc(unsigned int const index) {
-  return [index] (ROOT::VecOps::RVec<float> const& vec) {
-    return vec.at(index);
-  };
-}
 
 inline void drawText(
   std::string const& text,
@@ -55,8 +45,8 @@ inline void drawText(
   pt->Draw();
 }
 
-void plot_single(std::pair<std::string, std::string> const& tagAndFile) {
-  ROOT::RDataFrame dataframe("zdcTree", tagAndFile.second);
+void plot_single(SimulationConfig const& config) {
+  ROOT::RDataFrame dataframe("zdcTree", config.path);
 
   std::array<std::array<std::array<ROOT::RDF::RResultPtr< ::TH2D>, N_SIM_MODULES_USED>, N_SIM_MODULES_USED>, 2> hCorrelation {};
   std::array<std::array<ROOT::RDF::RResultPtr< ::TH1D>, N_SIM_MODULES_USED>, 2> hDistribution {};
@@ -73,7 +63,7 @@ void plot_single(std::pair<std::string, std::string> const& tagAndFile) {
         {
           Form("side%c_%s", getSideLabel(side), MODULE_NAMES.at(i).c_str()),
           Form(";%s Truth Energy [MeV];Count", MODULE_NAMES.at(i).c_str()),
-          BINS(axis::moduleAxes.at(i).withBins(48))
+          BINS(config.axes.at(i).withBins(48))
         },
         MODULE_NAMES.at(i) + "_truth"
       );
@@ -83,7 +73,7 @@ void plot_single(std::pair<std::string, std::string> const& tagAndFile) {
           {
             Form("side%c_%sVs%s", getSideLabel(side), MODULE_NAMES.at(i).c_str(), MODULE_NAMES.at(j).c_str()),
             Form(";%s Truth Energy [MeV];%s Truth Energy [MeV];Count", MODULE_NAMES.at(i).c_str(), MODULE_NAMES.at(j).c_str()),
-            BINS(axis::moduleAxes.at(i).withBins(48)), BINS(axis::moduleAxes.at(j).withBins(48))
+            BINS(config.axes.at(i).withBins(48)), BINS(config.axes.at(j).withBins(48))
           },
           MODULE_NAMES.at(i) + "_truth", MODULE_NAMES.at(j) + "_truth"
         );
@@ -93,7 +83,7 @@ void plot_single(std::pair<std::string, std::string> const& tagAndFile) {
 
   unsigned int const M = N_SIM_MODULES_USED + 1;
   for (auto const& side : SIDES) {
-    TCanvas * canvas = new TCanvas(Form("%s_side%c_correlation", tagAndFile.first.c_str(), SIDE_LABELS.at(side)));
+    TCanvas * canvas = new TCanvas(Form("%s_side%c_correlation", config.tag.c_str(), SIDE_LABELS.at(side)));
     canvas->Divide(M, M);
     for (unsigned int k = 0; k < M*M; k++) {
       canvas->cd(k + 1);
@@ -137,9 +127,9 @@ void plot_single(std::pair<std::string, std::string> const& tagAndFile) {
  void plot_truth_correlations() {
   ROOT::EnableImplicitMT();
   TFile* plotFile = TFile::Open(OUT_FILE_PATH.c_str(), "RECREATE");
-  for (auto const& tagAndFile : SIM_FILE_PATHS) {
-    plotFile->mkdir(tagAndFile.first.c_str())->cd();
-    plot_single(tagAndFile);
+  for (auto const& config : SIM_CONFIGS) {
+    plotFile->mkdir(config.tag.c_str())->cd();
+    plot_single(config);
   }
   plotFile->Close();
 }

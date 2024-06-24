@@ -3,7 +3,7 @@
 #include "TTreeReaderValue.h"
 #include "TTreeReaderArray.h"
 
-#include "../include/ZDCModule.h"
+#include "../include/ZDCModule.hpp"
 
 unsigned int constexpr MAX_EVENTS = 1e6;
 

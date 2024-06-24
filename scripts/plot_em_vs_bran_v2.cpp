@@ -1,21 +1,12 @@
 #include "ROOT/RDataFrame.hxx" // for full docs, see https://root.cern/doc/master/classROOT_1_1RDataFrame.html
 
-#include "../include/Axis.h"
-#include "../include/ZDCModule.h"
+#include "../include/Axis.hpp"
+#include "../include/ZDCModule.hpp"
 
 std::string const SIM_FILE_PATH = "../data/SingleNeutronNew.2024.05.19_NTUP.root";
 std::string const OUT_FILE_PATH = "../plots/em_vs_bran_v2.root";
 
-std::string const MODULE_TRUTH_ENERGIES_BRANCH = "zdc_ZdcModuleTruthTotal";
-
-/**
- * @brief get a function that picks an element at a specified index given a vector
- */
-inline std::function<float(ROOT::VecOps::RVec<float> const& vec)> getVectorUnpackerFunc(unsigned int const index) {
-  return [index] (ROOT::VecOps::RVec<float> const& vec) {
-    return vec.at(index);
-  };
-}
+namespace axisConfig = axis::singleNeutron;
 
 /**
  * @brief plot EM module truth vs BRAN truth
@@ -41,7 +32,7 @@ inline void plot_em_vs_bran_v2() {
     );
     // make histogram from these new branches
     hEMVsBRAN.at(side) = dataframeUnpacked.Histo2D<float, float>(
-      {Form("side%c_EMVsBRAN", getSideLabel(side)), ";EM Truth Energy [MeV];BRAN Truth Energy [MeV];Count", BINS(axis::EMTruth.withBins(32)), BINS(axis::BRANTruth.withBins(32))},
+      {Form("side%c_EMVsBRAN", getSideLabel(side)), ";EM Truth Energy [MeV];BRAN Truth Energy [MeV];Count", BINS(axisConfig::EMTruth.withBins(32)), BINS(axisConfig::BRANTruth.withBins(32))},
       "em_truth", "bran_truth"
     );
   }

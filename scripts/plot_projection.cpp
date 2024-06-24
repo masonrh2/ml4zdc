@@ -1,7 +1,7 @@
 #include "ROOT/RDataFrame.hxx" // for full docs, see https://root.cern/doc/master/classROOT_1_1RDataFrame.html
 
-#include "../include/Axis.h"
-#include "../include/ZDCModule.h"
+#include "../include/Axis.hpp"
+#include "../include/ZDCModule.hpp"
 
 // right now this file will only process single neutron events,
 // but it can be easily modified to calculate the centroid of any number of neutrons
@@ -17,15 +17,6 @@ namespace particleBranches {
   std::string const py = "zdc_ZdcTruthParticlePy";
   std::string const pz = "zdc_ZdcTruthParticlePz";
   std::string const e = "zdc_ZdcTruthParticleEnergy";
-}
-
-/**
- * @brief get a function that picks an element at a specified index given a vector
- */
-inline std::function<float(ROOT::VecOps::RVec<float> const& vec)> getVectorUnpackerFunc(unsigned int const index) {
-  return [index] (ROOT::VecOps::RVec<float> const& vec) {
-    return vec.at(index);
-  };
 }
 
 typedef unsigned int ParticleType;
