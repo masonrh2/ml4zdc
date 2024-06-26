@@ -3,11 +3,11 @@
 #include "TTreeReaderArray.h"
 #include "TH2.h" // 2-dimensional histograms, for full docs see https://root.cern.ch/doc/master/classTH2.html
 
-#include "../include/ZDCModule.h"
-#include "../include/Axis.h"
+#include "../include/ZDCModule.hpp"
+#include "../include/Axis.hpp"
 
-std::string const SIM_FILE_PATH = "./data/SingleNeutronNew_2024-05-19_NTUP.root";
-std::string const OUT_FILE_PATH = "./plots/all_vs_bran.root";
+std::string const SIM_FILE_PATH = "../data/SingleNeutronNew.2024.05.19_NTUP.root";
+std::string const OUT_FILE_PATH = "../plots/all_vs_bran.root";
 
 /**
  * @brief plot EM module truth vs BRAN truth

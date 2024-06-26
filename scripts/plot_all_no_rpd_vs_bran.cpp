@@ -3,11 +3,13 @@
 #include "TTreeReaderArray.h"
 #include "TH2.h" // 2-dimensional histograms, for full docs see https://root.cern.ch/doc/master/classTH2.html
 
-#include "../include/ZDCModule.h"
-#include "../include/Axis.h"
+#include "../include/ZDCModule.hpp"
+#include "../include/Axis.hpp"
 
-std::string const SIM_FILE_PATH = "./data/SingleNeutronNew_2024-05-19_NTUP.root";
-std::string const OUT_FILE_PATH = "./plots/all_no_rpd_vs_bran.root";
+std::string const SIM_FILE_PATH = "../data/SingleNeutronNew.2024.05.19_NTUP.root";
+std::string const OUT_FILE_PATH = "../plots/all_no_rpd_vs_bran.root";
+
+namespace axisConfig = axis::singleNeutron;
 
 /**
  * @brief plot EM module truth vs BRAN truth
@@ -31,7 +33,7 @@ inline void plot_all_no_rpd_vs_bran() {
     hHAD1VsBRAN.at(side) = new TH2D(Form("side%c_AllNoRPDVsBRAN", getSideLabel(side)), 
       ";Truth Total Energy (no BRAN or RPD) [MeV];BRAN Truth Energy [MeV];Count", 
       BINS(tot), 
-      BINS(axis::BRANTruth.withBins(32)));
+      BINS(axisConfig::BRANTruth.withBins(32)));
   }
 
   while (reader.Next()) {

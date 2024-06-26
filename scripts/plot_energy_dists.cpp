@@ -6,11 +6,13 @@
 #include "TLegend.h"
 #include "TLegendEntry.h"
 
-#include "../include/ZDCModule.h"
-#include "../include/Axis.h"
+#include "../include/ZDCModule.hpp"
+#include "../include/Axis.hpp"
 
-std::string const SIM_FILE_PATH = "./data/SingleNeutronNew_2024-05-19_NTUP.root";
-std::string const OUT_FILE_PATH = "./plots/energy_dists.root";
+std::string const SIM_FILE_PATH = "../data/SingleNeutronNew.2024.05.19_NTUP.root";
+std::string const OUT_FILE_PATH = "../plots/energy_dists.root";
+
+namespace axisConfig = axis::singleNeutron;
 
 inline void plot_energy_dists() {
   TH1::AddDirectory(false);
@@ -28,17 +30,17 @@ inline void plot_energy_dists() {
   std::array<TH1D*, 2> HAD3_hists {};
   for (auto const& side : SIDES) {
     EM_hists.at(side) = new TH1D(Form("side%c_em_energy", getSideLabel(side)), 
-        ";EM Energy [MeV];Count", BINS(axis::EMTruth.withBins(32)));
+        ";EM Energy [MeV];Count", BINS(axisConfig::EMTruth.withBins(32)));
     RPD_hists.at(side) = new TH1D(Form("side%c_rpd_energy", getSideLabel(side)), 
-        ";RPD Energy [MeV];Count", BINS(axis::EMTruth.withBins(32)));
+        ";RPD Energy [MeV];Count", BINS(axisConfig::EMTruth.withBins(32)));
     BRAN_hists.at(side) = new TH1D(Form("side%c_bran_energy", getSideLabel(side)), 
-        ";BRAN Energy [MeV];Count", BINS(axis::EMTruth.withBins(32)));
+        ";BRAN Energy [MeV];Count", BINS(axisConfig::EMTruth.withBins(32)));
     HAD1_hists.at(side) = new TH1D(Form("side%c_had1_energy", getSideLabel(side)), 
-        ";HAD1 Energy [MeV];Count", BINS(axis::EMTruth.withBins(32)));
+        ";HAD1 Energy [MeV];Count", BINS(axisConfig::EMTruth.withBins(32)));
     HAD2_hists.at(side) = new TH1D(Form("side%c_had2_energy", getSideLabel(side)), 
-        ";HAD2 Energy [MeV];Count", BINS(axis::EMTruth.withBins(32)));
+        ";HAD2 Energy [MeV];Count", BINS(axisConfig::EMTruth.withBins(32)));
     HAD3_hists.at(side) = new TH1D(Form("side%c_had3_energy", getSideLabel(side)), 
-        ";HAD3 Energy [MeV];Count", BINS(axis::EMTruth.withBins(32)));
+        ";HAD3 Energy [MeV];Count", BINS(axisConfig::EMTruth.withBins(32)));
   }
 
   while (reader.Next()) {
