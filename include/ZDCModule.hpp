@@ -1,16 +1,19 @@
 #pragma once
 
+#include "StatusBits.hpp"
+
 #include <array>
 #include <stdexcept>
 #include <functional>
+#include <bitset>
 
-#include "ROOT/RDataFrame.hxx"
+#include "ROOT/RVec.hxx"
 
-namespace Side {
+namespace side {
   unsigned int constexpr C = 0;
   unsigned int constexpr A = 1;
 }
-std::array<unsigned int, 2> constexpr SIDES = {Side::C, Side::A};
+std::array<unsigned int, 2> constexpr SIDES = {side::C, side::A};
 std::array<char, 2> constexpr SIDE_LABELS = {'C', 'A'};
 
 inline void checkSide(unsigned int const side) {
@@ -37,7 +40,8 @@ enum struct SimModule : unsigned int {
 
 std::string const MODULE_TRUTH_ENERGIES_BRANCH = "zdc_ZdcModuleTruthTotal";
 
-std::array<std::string, N_SIM_MODULES_USED> const MODULE_NAMES = {"EM", "HAD1" ,"HAD2" ,"HAD3" ,"RPD" ,"BRAN"};
+std::array<std::string, N_SIM_MODULES_USED> const SIM_MODULE_NAMES = {"EM", "HAD1" ,"HAD2" ,"HAD3" ,"RPD" ,"BRAN"};
+std::array<std::string, N_RECO_MODULES> const RECO_MODULE_NAMES = {"EM", "HAD1" ,"HAD2" ,"HAD3"};
 
 // plot in order of location in detector, closest to beam first
 std::array<unsigned int, N_SIM_MODULES_USED> constexpr MODULE_PLOT_ORDER = {0, 4, 5, 1, 2, 3};
@@ -71,4 +75,48 @@ inline std::function<float(ROOT::VecOps::RVec<float> const& vec)> getVectorUnpac
   return [index, scaleFactor] (ROOT::VecOps::RVec<float> const& vec) {
     return vec.at(index)*scaleFactor;
   };
+}
+
+namespace Reco {
+  namespace ZDC {
+    inline std::function<bool(ROOT::VecOps::RVec<short> const& zdc_ZdcStatus)> checkValid(unsigned int const side) {
+      // cast short to bool to check status
+      return [side] (ROOT::VecOps::RVec<short> const& zdc_ZdcStatus) -> bool {
+        return zdc_ZdcStatus.at(side);
+      };
+    }
+    inline std::function<float(ROOT::VecOps::RVec<float> const& zdc_ZdcEnergy)> getEnergy(unsigned int const side) {
+      return [side] (ROOT::VecOps::RVec<float> const& zdc_ZdcEnergy) {
+        return zdc_ZdcEnergy.at(side);
+      };
+    }
+  }
+  namespace ZDCModule {
+    inline std::function<bool(ROOT::VecOps::RVec<unsigned int> const& zdc_ZdcModuleStatus)> checkValid(unsigned int const side, RecoModule const mod) {
+      return [side, mod] (ROOT::VecOps::RVec<unsigned int> const& zdc_ZdcModuleStatus) {
+        return !std::bitset<status::ZDCModule::N_BITS> (zdc_ZdcModuleStatus.at(getModuleIndex(side, mod)))[status::ZDCModule::FailBit];
+      };
+    }
+    inline std::function<float(ROOT::VecOps::RVec<float> const& zdc_ZdcModuleCalibAmp)> getEnergy(unsigned int const side, RecoModule const mod) {
+      return [side, mod] (ROOT::VecOps::RVec<float> const& zdc_ZdcModuleCalibAmp) {
+        return zdc_ZdcModuleCalibAmp.at(getModuleIndex(side, mod));
+      };
+    }
+  }
+  namespace RPD {
+    inline std::function<bool(ROOT::VecOps::RVec<unsigned int> const& zdc_RpdSideStatus)> checkValid(unsigned int const side) {
+      return [side] (ROOT::VecOps::RVec<unsigned int> const& zdc_RpdSideStatus) {
+        return std::bitset<status::RPD::N_BITS> (zdc_RpdSideStatus.at(side))[status::RPD::ValidBit];
+      };
+    }
+    inline std::function<float(ROOT::VecOps::RVec<float> const& zdc_RpdChannelAmplitude)> getSumSumADC(unsigned int const side) {
+      return [side] (ROOT::VecOps::RVec<float> const& zdc_RpdChannelAmplitude) {
+        float sum = 0;
+        for (unsigned int ch = 0; ch < 16; ch++) {
+          sum += zdc_RpdChannelAmplitude.at(getModuleIndex(side, ch, 16));
+        }
+        return sum;
+      };
+    }
+  }
 }

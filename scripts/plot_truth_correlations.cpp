@@ -55,27 +55,27 @@ void plot_single(SimulationConfig const& config) {
     ROOT::RDF::RInterface<ROOT::Detail::RDF::RLoopManager, void> dataframeUnpacked = dataframe;
     for (unsigned int mod = 0; mod < N_SIM_MODULES_USED; mod++) {
       dataframeUnpacked = dataframeUnpacked.Define(
-        MODULE_NAMES.at(mod) + "_truth", getVectorUnpackerFunc(getModuleIndex(side, static_cast<SimModule>(mod))), {MODULE_TRUTH_ENERGIES_BRANCH}
+        SIM_MODULE_NAMES.at(mod) + "_truth", getVectorUnpackerFunc(getModuleIndex(side, static_cast<SimModule>(mod))), {MODULE_TRUTH_ENERGIES_BRANCH}
       );
     }
     for (unsigned int i = 0; i < N_SIM_MODULES_USED; i++) {
       hDistribution.at(side).at(i) = dataframeUnpacked.Histo1D<float>(
         {
-          Form("side%c_%s", getSideLabel(side), MODULE_NAMES.at(i).c_str()),
-          Form(";%s Truth Energy [MeV];Count", MODULE_NAMES.at(i).c_str()),
+          Form("side%c_%s", getSideLabel(side), SIM_MODULE_NAMES.at(i).c_str()),
+          Form(";%s Truth Energy [MeV];Count", SIM_MODULE_NAMES.at(i).c_str()),
           BINS(config.axes.at(i).withBins(48))
         },
-        MODULE_NAMES.at(i) + "_truth"
+        SIM_MODULE_NAMES.at(i) + "_truth"
       );
       for (unsigned int j = 0; j < N_SIM_MODULES_USED; j++) {
         if (i == j) continue;
         hCorrelation.at(side).at(i).at(j) = dataframeUnpacked.Histo2D<float, float>(
           {
-            Form("side%c_%sVs%s", getSideLabel(side), MODULE_NAMES.at(i).c_str(), MODULE_NAMES.at(j).c_str()),
-            Form(";%s Truth Energy [MeV];%s Truth Energy [MeV];Count", MODULE_NAMES.at(i).c_str(), MODULE_NAMES.at(j).c_str()),
+            Form("side%c_%sVs%s", getSideLabel(side), SIM_MODULE_NAMES.at(i).c_str(), SIM_MODULE_NAMES.at(j).c_str()),
+            Form(";%s Truth Energy [MeV];%s Truth Energy [MeV];Count", SIM_MODULE_NAMES.at(i).c_str(), SIM_MODULE_NAMES.at(j).c_str()),
             BINS(config.axes.at(i).withBins(48)), BINS(config.axes.at(j).withBins(48))
           },
-          MODULE_NAMES.at(i) + "_truth", MODULE_NAMES.at(j) + "_truth"
+          SIM_MODULE_NAMES.at(i) + "_truth", SIM_MODULE_NAMES.at(j) + "_truth"
         );
       }
     }
@@ -97,7 +97,7 @@ void plot_single(SimulationConfig const& config) {
       } else if (i == 0 || j == 0) {
         // top row or leftmost column, use as label
         unsigned int const mod = i + j - 1;
-        drawText(MODULE_NAMES.at(MODULE_PLOT_ORDER.at(mod)), 0.3, 45, kHAlignCenter + kVAlignCenter);
+        drawText(SIM_MODULE_NAMES.at(MODULE_PLOT_ORDER.at(mod)), 0.3, 45, kHAlignCenter + kVAlignCenter);
         continue;
       } // else plot
       if (i == j) {

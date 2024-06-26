@@ -49,9 +49,9 @@ unsigned int getParticleSelectorFunc(ROOT::VecOps::RVec<ParticleType> const& par
   std::vector<unsigned int> indices;
   for (unsigned int i = 0; i < particleTypes.size(); i++) {
     ParticleType const& type = particleTypes.at(i);
-    if (side == Side::C && type == particleTypes::toSideC) {
+    if (side == side::C && type == particleTypes::toSideC) {
       indices.push_back(i);
-    } else if (side == Side::A && type == particleTypes::toSideA) {
+    } else if (side == side::A && type == particleTypes::toSideA) {
       indices.push_back(i);
     }
   }
