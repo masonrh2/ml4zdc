@@ -5,7 +5,7 @@
 
 // right now this file will only process single neutron events,
 // but it can be easily modified to calculate the centroid of any number of neutrons
-\
+
 std::string const SIM_FILE_PATH = "../data/SingleNeutronNew.2024.05.19_NTUP.root";
 std::string const OUT_FILE_PATH = "../plots/projection.root";
 
