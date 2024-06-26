@@ -1,10 +1,13 @@
 #include "ROOT/RDataFrame.hxx" // for full docs, see https://root.cern/doc/master/classROOT_1_1RDataFrame.html
 
-#include "../include/Axis.h"
-#include "../include/ZDCModule.h"
+#include "../include/Axis.hpp"
+#include "../include/ZDCModule.hpp"
 
-std::string const SIM_FILE_PATH = "./data/SingleNeutronNew_2024-05-19_NTUP.root";
-std::string const OUT_FILE_PATH = "./plots/projection.root";
+// right now this file will only process single neutron events,
+// but it can be easily modified to calculate the centroid of any number of neutrons
+\
+std::string const SIM_FILE_PATH = "../data/SingleNeutronNew.2024.05.19_NTUP.root";
+std::string const OUT_FILE_PATH = "../plots/projection.root";
 
 namespace particleBranches {
   std::string const x = "zdc_ZdcTruthParticlePosx";
@@ -14,15 +17,6 @@ namespace particleBranches {
   std::string const py = "zdc_ZdcTruthParticlePy";
   std::string const pz = "zdc_ZdcTruthParticlePz";
   std::string const e = "zdc_ZdcTruthParticleEnergy";
-}
-
-/**
- * @brief get a function that picks an element at a specified index given a vector
- */
-inline std::function<float(ROOT::VecOps::RVec<float> const& vec)> getVectorUnpackerFunc(unsigned int const index) {
-  return [index] (ROOT::VecOps::RVec<float> const& vec) {
-    return vec.at(index);
-  };
 }
 
 typedef unsigned int ParticleType;
@@ -55,18 +49,17 @@ unsigned int getParticleSelectorFunc(ROOT::VecOps::RVec<ParticleType> const& par
   std::vector<unsigned int> indices;
   for (unsigned int i = 0; i < particleTypes.size(); i++) {
     ParticleType const& type = particleTypes.at(i);
-    if (side == Side::C && type == particleTypes::toSideC) {
+    if (side == side::C && type == particleTypes::toSideC) {
       indices.push_back(i);
-    } else if (side == Side::A && type == particleTypes::toSideA) {
+    } else if (side == side::A && type == particleTypes::toSideA) {
       indices.push_back(i);
     }
   }
   if (indices.size() == 0) {
-    throw std::runtime_error("no particles match side " + std::to_string(getSideLabel(side)) + " selection!");
-  } 
-  // else if (indices.size() > 1) {
-  //   throw std::runtime_error(std::to_string(indices.size()) + " > 1 particles match side " + std::to_string(getSideLabel(side)) + " selection!");
-  // }
+    throw std::runtime_error("no particles match side " + std::string(1, getSideLabel(side)) + " selection!");
+  } else if (indices.size() > 1) {
+    throw std::runtime_error(std::to_string(indices.size()) + " > 1 particles match side " + std::string(1, getSideLabel(side)) + " selection!");
+  }
   return indices.at(0);
 }
 
@@ -126,6 +119,13 @@ std::function<ROOT::VecOps::RVec<float>(
   };
 }
 
+template <typename T>
+inline std::function<bool(ROOT::VecOps::RVec<T> const& vec)> filterVectorSize(unsigned int const size) {
+  return [size] (ROOT::VecOps::RVec<T> const& vec) {
+    return vec.size() == size;
+  };
+}
+
 /**
  * @brief 
  */
@@ -134,7 +134,10 @@ inline void plot_projection() {
   // this is great for large files, probably not much benefit for 100k events, though
   ROOT::EnableImplicitMT();
 
-  ROOT::RDataFrame dataframe("zdcTree", SIM_FILE_PATH);
+  auto dataframe = ROOT::RDataFrame("zdcTree", SIM_FILE_PATH).Filter(
+    filterVectorSize<float>(4), {particleBranches::pz}, "4 truth particles"
+  );
+  dataframe.Report()->Print();
 
   std::array<ROOT::RDF::RResultPtr< ::TH2D>, 2> hProjection {};
 
@@ -159,7 +162,7 @@ inline void plot_projection() {
     );
     // make histogram from these new branches
     hProjection.at(side) = dataframeUnpacked.Histo2D<float, float>(
-      {Form("side%c_projection", getSideLabel(side)), ";x [mm];y [mm];Count", BINS(axis::xAtRPD.withBins(256)), BINS(axis::yAtRPD.withBins(256))},
+      {Form("side%c_projection", getSideLabel(side)), ";x [mm];y [mm];Count", BINS(axis::xAtRPD.withBins(64)), BINS(axis::yAtRPD.withBins(64))},
       "projectionx", "projectiony"
     );
   }

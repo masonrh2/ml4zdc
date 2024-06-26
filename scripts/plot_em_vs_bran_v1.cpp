@@ -3,11 +3,13 @@
 #include "TTreeReaderArray.h"
 #include "TH2.h" // 2-dimensional histograms, for full docs see https://root.cern.ch/doc/master/classTH2.html
 
-#include "../include/ZDCModule.h"
-#include "../include/Axis.h"
+#include "../include/ZDCModule.hpp"
+#include "../include/Axis.hpp"
 
-std::string const SIM_FILE_PATH = "./data/SingleNeutronNew_2024-05-19_NTUP.root";
-std::string const OUT_FILE_PATH = "./plots/em_vs_bran_v1.root";
+std::string const SIM_FILE_PATH = "../data/SingleNeutronNew.2024.05.19_NTUP.root";
+std::string const OUT_FILE_PATH = "../plots/em_vs_bran_v1.root";
+
+namespace axisConfig = axis::singleNeutron;
 
 /**
  * @brief plot EM module truth vs BRAN truth
@@ -27,7 +29,7 @@ inline void plot_em_vs_bran_v1() {
 
   std::array<TH2D*, 2> hEMVsBRAN {};
   for (auto const& side : SIDES) {
-    hEMVsBRAN.at(side) = new TH2D(Form("side%c_EMVsBRAN", getSideLabel(side)), ";EM Truth Energy [MeV];BRAN Truth Energy [MeV];Count", BINS(axis::EMTruth.withBins(32)), BINS(axis::BRANTruth.withBins(32)));
+    hEMVsBRAN.at(side) = new TH2D(Form("side%c_EMVsBRAN", getSideLabel(side)), ";EM Truth Energy [MeV];BRAN Truth Energy [MeV];Count", BINS(axisConfig::EMTruth.withBins(32)), BINS(axisConfig::BRANTruth.withBins(32)));
   }
 
   while (reader.Next()) {

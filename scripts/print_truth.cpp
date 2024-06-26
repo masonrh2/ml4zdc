@@ -3,10 +3,11 @@
 #include "TTreeReaderValue.h"
 #include "TTreeReaderArray.h"
 
-#include "../include/ZDCModule.h"
+#include "../include/ZDCModule.hpp"
 
-unsigned int constexpr MAX_EVENTS = 10;
-std::string const SIM_FILE_PATH = "../data/ZDC_sim_1n_100k.root";
+unsigned int constexpr MAX_EVENTS = 1e6;
+
+std::string const SIM_FILE_PATH = "../data/SingleNeutronNew.2024.05.19_NTUP.root";
 
 inline std::string getString(TTreeReaderArray<float> const& array, unsigned int const precision = 2) {
   std::string tmp = "";
@@ -42,8 +43,10 @@ inline void print_truth() {
 
   unsigned int event = 0;
   while (reader.Next() && event < MAX_EVENTS) {
-    std::cout << "side C module truth: " << getSideString(zdc_ZdcModuleTruthTotal, Side::C) << std::endl;
-    std::cout << "side A module truth: " << getSideString(zdc_ZdcModuleTruthTotal, Side::A) << std::endl;
+    if (zdc_ZdcTruthParticlePosx.GetSize()  == 4) continue;
+    std::cout << "# truth particles is " << zdc_ZdcTruthParticlePosx.GetSize() << " != 4 at entry " << reader.GetCurrentEntry() << std::endl;
+    // std::cout << "side C module truth: " << getSideString(zdc_ZdcModuleTruthTotal, Side::C) << std::endl;
+    // std::cout << "side A module truth: " << getSideString(zdc_ZdcModuleTruthTotal, Side::A) << std::endl;
     std::cout << "\tparticle x: " << getString(zdc_ZdcTruthParticlePosx) << std::endl;
     std::cout << "\tparticle y: " << getString(zdc_ZdcTruthParticlePosy) << std::endl;
     std::cout << "\tparticle z: " << getString(zdc_ZdcTruthParticlePosz) << std::endl;
