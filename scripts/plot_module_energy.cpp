@@ -62,14 +62,14 @@ void writePlot(SimulationConfig const& config) {
       hZDCModuleRecoEnergy.at(side).at(mod) = dfValidMod.Histo1D<float>(
         {
           Form("side%c_%s_reco", getSideLabel(side), moduleName),
-          Form(";%s Reco. Amplitude [ADC]; Count", moduleName),
+          Form(";%s Module Reco. Amplitude [ADC]; Count", moduleName),
           BINS(recoModuleAxis)
         }, RECO_MODULE_NAMES.at(mod) + "_reco"
       );
       hModuleCorrelation.at(side).at(mod) = dfValidMod.Histo2D<float, float>(
         {
           Form("side%c_%s_correlation", getSideLabel(side), moduleName),
-          Form(";%s Truth Energy [GeV];%s Reco. Amplitude [ADC]; Count", moduleName, moduleName),
+          Form(";%s Module Truth Total Energy [GeV];%s Reco. Amplitude [ADC]; Count", moduleName, moduleName),
           BINS(truthModuleAxis), BINS(recoModuleAxis)
         }, SIM_MODULE_NAMES.at(mod) + "_truth", RECO_MODULE_NAMES.at(mod) + "_reco"
       );
@@ -78,7 +78,7 @@ void writePlot(SimulationConfig const& config) {
       hTruthEnergy.at(side).at(mod) = dataframeUnpacked.Histo1D<float>(
         {
           Form("side%c_%s_truth", getSideLabel(side), SIM_MODULE_NAMES.at(mod).c_str()),
-          Form(";%s Truth Energy [GeV];Count", SIM_MODULE_NAMES.at(mod).c_str()),
+          Form(";%s Module Truth Total Energy [GeV];Count", SIM_MODULE_NAMES.at(mod).c_str()),
           BINS(truthModuleAxis)
         },
         SIM_MODULE_NAMES.at(mod) + "_truth"
@@ -89,66 +89,68 @@ void writePlot(SimulationConfig const& config) {
   for (auto const side : SIDES) {
     {
       auto canvas = std::make_unique<TCanvas>(Form("%s_side%c_moduleTruthEnergies", config.tag.c_str(), getSideLabel(side)));
-        THStack *stack = new THStack();
-        TLegend *legend = new TLegend(
-          0.7,
-          0.55,
-          1 - gPad->GetRightMargin(),
-          1 - gPad->GetTopMargin()
-        );
-        for (unsigned int i = 0; i < N_SIM_MODULES_USED; i++) {
-          auto const mod = MODULE_PLOT_ORDER.at(i);
-          auto & hist = hTruthEnergy.at(side).at(mod);
-          auto const& name = SIM_MODULE_NAMES.at(mod);
-          hist->SetLineColor(MODULE_COLORS.at(i));
-          stack->Add(hist.GetPtr(), "HIST");
-          legend->AddEntry(hist.GetPtr(), name.c_str(), "l");
-        }
-        stack->Draw("NOSTACK");
-        legend->Draw();
-        canvas->Write();
-        
-        canvas->SetLogy();
-        canvas->Write(Form("%s_logy", canvas->GetName()));
-        
-        stack->Draw();
-        legend->Draw();
-        canvas->SetLogy(false);
-        canvas->Write(Form("%s_stack", canvas->GetName()));
-        
-        canvas->SetLogy();
-        canvas->Write(Form("%s_stack_logy", canvas->GetName()));
+      THStack *stack = new THStack();
+      TLegend *legend = new TLegend(
+        0.7,
+        0.55,
+        1 - gPad->GetRightMargin(),
+        1 - gPad->GetTopMargin()
+      );
+      for (unsigned int i = 0; i < N_SIM_MODULES_USED; i++) {
+        auto const mod = MODULE_PLOT_ORDER.at(i);
+        auto & hist = hTruthEnergy.at(side).at(mod);
+        auto const& name = SIM_MODULE_NAMES.at(mod);
+        hist->SetLineColor(MODULE_COLORS.at(i));
+        stack->Add(hist.GetPtr(), "HIST");
+        legend->AddEntry(hist.GetPtr(), name.c_str(), "l");
+      }
+      stack->Draw("NOSTACK");
+      stack->GetXaxis()->SetTitle("Module Truth Total Energy [GeV]");
+      legend->Draw();
+      canvas->Write();
+      
+      canvas->SetLogy();
+      canvas->Write(Form("%s_logy", canvas->GetName()));
+      
+      stack->Draw();
+      legend->Draw();
+      canvas->SetLogy(false);
+      canvas->Write(Form("%s_stack", canvas->GetName()));
+      
+      canvas->SetLogy();
+      canvas->Write(Form("%s_stack_logy", canvas->GetName()));
     }
     {
       auto canvas = std::make_unique<TCanvas>(Form("%s_side%c_moduleRecoEnergies", config.tag.c_str(), getSideLabel(side)));
-        THStack *stack = new THStack();
-        TLegend *legend = new TLegend(
-          0.7,
-          0.55,
-          1 - gPad->GetRightMargin(),
-          1 - gPad->GetTopMargin()
-        );
-        for (unsigned int mod = 0; mod < N_RECO_MODULES; mod++) {
-          auto & hist = hZDCModuleRecoEnergy.at(side).at(mod);
-          auto const& name = RECO_MODULE_NAMES.at(mod);
-          hist->SetLineColor(MODULE_COLORS.at(mod));
-          stack->Add(hist.GetPtr(), "HIST");
-          legend->AddEntry(hist.GetPtr(), name.c_str(), "l");
-        }
-        stack->Draw("NOSTACK");
-        legend->Draw();
-        canvas->Write();
-        
-        canvas->SetLogy();
-        canvas->Write(Form("%s_logy", canvas->GetName()));
-        
-        stack->Draw();
-        legend->Draw();
-        canvas->SetLogy(false);
-        canvas->Write(Form("%s_stack", canvas->GetName()));
-        
-        canvas->SetLogy();
-        canvas->Write(Form("%s_stack_logy", canvas->GetName()));
+      THStack *stack = new THStack();
+      TLegend *legend = new TLegend(
+        0.7,
+        0.55,
+        1 - gPad->GetRightMargin(),
+        1 - gPad->GetTopMargin()
+      );
+      for (unsigned int mod = 0; mod < N_RECO_MODULES; mod++) {
+        auto & hist = hZDCModuleRecoEnergy.at(side).at(mod);
+        auto const& name = RECO_MODULE_NAMES.at(mod);
+        hist->SetLineColor(MODULE_COLORS.at(mod));
+        stack->Add(hist.GetPtr(), "HIST");
+        legend->AddEntry(hist.GetPtr(), name.c_str(), "l");
+      }
+      stack->Draw("NOSTACK");
+      stack->GetXaxis()->SetTitle("Module Reco. Amplitude [ADC]");
+      legend->Draw();
+      canvas->Write();
+      
+      canvas->SetLogy();
+      canvas->Write(Form("%s_logy", canvas->GetName()));
+      
+      stack->Draw();
+      legend->Draw();
+      canvas->SetLogy(false);
+      canvas->Write(Form("%s_stack", canvas->GetName()));
+      
+      canvas->SetLogy();
+      canvas->Write(Form("%s_stack_logy", canvas->GetName()));
     }
     for (unsigned int mod = 0; mod < N_RECO_MODULES; mod++) {
       auto & hist = hModuleCorrelation.at(side).at(mod);
